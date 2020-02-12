@@ -1,6 +1,6 @@
 using System;
 
-namespace CaptiosusDomum
+namespace Api
 {
     public class WeatherForecast
     {

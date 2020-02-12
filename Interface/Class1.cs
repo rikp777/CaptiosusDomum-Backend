@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Interfaces
+namespace Interface
 {
     public class Class1
     {
