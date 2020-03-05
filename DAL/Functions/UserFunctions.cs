@@ -1,19 +1,20 @@
 ﻿using DAL.Context.ApplicationContext;
-using DAL.Context.Entities;
-using DAL.Interface;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Interface.Interface;
+using Interface.Entities;
 
 namespace DAL.Functions
 {
     public class UserFunctions: IUser
     {
-        public async Task<User> Adduser(string username, string email, string password)
+        public async Task<UserEntity> Adduser(string username, string email, string password)
         {
-            User newuser = new User
+            UserEntity newuser = new UserEntity 
             {
                 Username = username,
                 Email = email,
@@ -27,9 +28,9 @@ namespace DAL.Functions
             return newuser;
         }
 
-        public async Task<List<User>> GetAllUsers()
+        public async Task<List<UserEntity>> GetAllUsers()
         {
-            List<User> users = new List<User>();
+            List<UserEntity> users = new List<UserEntity>();
             using (var context = new DatabaseContext(DatabaseContext.ops.dbOptions))
             {
                 users = await context.Users.ToListAsync();
@@ -37,5 +38,14 @@ namespace DAL.Functions
             return users;
         }
 
+        public async Task<UserEntity> GetUserByUserName(string username)
+        {
+            UserEntity user = null;
+            using (var context = new DatabaseContext(DatabaseContext.ops.dbOptions))
+            {
+                user = await context.Users.FindAsync(context.Users.Where(o => o.Username == username));
+            }
+            return user;
+        }
     }
 }

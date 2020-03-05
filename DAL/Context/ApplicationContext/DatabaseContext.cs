@@ -1,4 +1,4 @@
-﻿using DAL.Context.Entities;
+﻿using Interface.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -26,6 +26,6 @@ namespace DAL.Context.ApplicationContext
         public static OptionsBuild ops = new OptionsBuild();
         public DatabaseContext(DbContextOptions<DatabaseContext> options): base(options) { }
         //DBSETS GO HERE
-        public DbSet<User> Users { get; set; }
+        public DbSet<UserEntity> Users { get; set; }
     }
 }
