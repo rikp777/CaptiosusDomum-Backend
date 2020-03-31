@@ -1,29 +1,32 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.IO;
+using Api.Api.GlobalErrorHandling.Extensions;
+using Api.Api.Services.Logger;
 using Api.Dal;
 using Api.Dal.Context;
 using Api.Dal.Interface;
+using Api.Extensions;
 using Api.Logic;
 using Api.Logic.Interface;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using NLog;
 
 namespace Api
 {
     public class Startup
     {
+        //private ILoggerManager logger;
+
         public Startup(IConfiguration configuration)
         {
+            LogManager.LoadConfiguration(String.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
             Configuration = configuration;
         }
 
@@ -32,22 +35,21 @@ namespace Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.ConfigureCors();
+            services.ConfigureIISIntegration();
+            services.ConfigureSwaggerGenerator();
+            services.ConfigureLoggerService();
 
-            services.AddDbContext<DatabaseContext>(options =>
+            services.AddDbContext<RepositoryContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("CaptiosusDomumDataBase")));
+
+            services.AddControllers();
 
             //CONTEXT
             services.AddScoped<IUserContext, UserContext>();
 
             //LOGIC
             services.AddScoped<IUserLogic, UserLogic>();
-
-            // Register the Swagger generator, defining 1 or more Swagger documents
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
-            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -68,7 +70,19 @@ namespace Api
                 app.UseDeveloperExceptionPage();
             }
 
+            //app.ConfigureExceptionHandler(logger);
+            //app.ConfigureCustomExceptionMiddleware();
+            
             app.UseHttpsRedirection();
+
+            app.UseStaticFiles();
+
+            app.UseCors("CorsPolicy");
+
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.All
+            });
 
             app.UseRouting();
 

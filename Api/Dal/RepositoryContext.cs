@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Api.Dal
 {
-    public class DatabaseContext: DbContext
+    public class RepositoryContext: DbContext
     {
-        public DatabaseContext(DbContextOptions<DatabaseContext> options)
+        public RepositoryContext(DbContextOptions<RepositoryContext> options)
         : base(options)
         { }
 

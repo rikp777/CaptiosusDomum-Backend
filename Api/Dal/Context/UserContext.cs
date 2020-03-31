@@ -9,9 +9,9 @@ namespace Api.Dal.Context
 {
     public class UserContext : IUserContext
     {
-        private DatabaseContext _context;
+        private RepositoryContext _context;
 
-        public UserContext(DatabaseContext context)
+        public UserContext(RepositoryContext context)
         {
             _context = context;
         }

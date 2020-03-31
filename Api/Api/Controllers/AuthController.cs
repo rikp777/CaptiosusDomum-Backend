@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Api.Logic;
+﻿using System.Threading.Tasks;
 using Api.Logic.Interface;
-using Api.Models;
-
-using Microsoft.AspNetCore.Http;
+using Api.Api;
+using Api.Api.EntityModels.User;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Api.Controllers
+namespace Api.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
@@ -23,16 +18,16 @@ namespace Api.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<JsonResult> Login([FromBody] string username, string password)
+        public async Task<JsonResult> Login([FromBody] UserRegister user)
         {
-            UserRegisterModel user = await _userLogic.Login(username, password);
-            return new JsonResult(user);
+            User loggedInUser = await _userLogic.Login(user.username, user.password);
+            return new JsonResult(loggedInUser);
         }
 
         [HttpPost("register")]
-        public async Task<JsonResult> Register([FromBody] UserRegisterModel user)
+        public async Task<JsonResult> Register([FromBody] UserRegister user)
         {
-            UserRegisterModel newuser = await _userLogic.Register(user.username, user.email, user.password);
+            User newuser = await _userLogic.Register(user.username, user.email, user.password);
             return new JsonResult(newuser);
         }
 

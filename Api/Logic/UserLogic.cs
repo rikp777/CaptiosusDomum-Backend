@@ -1,7 +1,7 @@
 ﻿using Api.Dal.Interface;
 using Api.Logic.Interface;
-using Api.Models;
-using Api.Models.User;
+using Api.Api;
+using Api.Api.EntityModels.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,21 +18,21 @@ namespace Api.Logic
             _userContext = userContext;
         }
 
-        public async Task<UserRegisterModel> Login(string username, string password)
+        public async Task<User> Login(string username, string password)
         {
             UserEntity userEntity = await _userContext.getUserByUsername(username);
 
-            if (userEntity.Equals(default))
+            if (userEntity.Id != 0)
             {
                 if (BCrypt.Net.BCrypt.Verify(password, userEntity.Password))
                 {
-                    return new UserRegisterModel(userEntity.Username, userEntity.Password, userEntity.Email);
+                    return new User(userEntity.Username, userEntity.Password, userEntity.Email);
                 }
             }
             return null;
         }
 
-        public async Task<UserRegisterModel> Register(string username, string email, string password)
+        public async Task<User> Register(string username, string email, string password)
         {
             //Encrypt password before storing it
             string encyptedpassword = BCrypt.Net.BCrypt.HashPassword(password);
@@ -41,9 +41,9 @@ namespace Api.Logic
 
             UserEntity userEntity = await _userContext.registerNewUser(newUser);
            
-            if (userEntity.Equals(default(UserEntity)))
+            if (userEntity.Id != 0)
             {
-                return new UserRegisterModel(userEntity.Username, userEntity.Password, userEntity.Email);
+                return new User(userEntity.Username, userEntity.Password, userEntity.Email);
             }
             return null;
         }
