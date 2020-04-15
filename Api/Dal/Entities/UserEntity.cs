@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Api.Dal.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -13,9 +14,12 @@ namespace Api
         [Required]
         public string Username { get; private set; }
         [Required]
-        public string Password { get; private set; }
+        public string Password { get; set; }
         [Required]
         public string Email { get; private set; }
+        public string Token { get; set; }
+
+        public List<HueBridgeEntity> hueBridgeEntities { get; set; }
 
         public UserEntity(int id, string username, string password, string email)
         {

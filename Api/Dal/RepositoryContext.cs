@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Configuration;
 using System.Threading.Tasks;
+using Api.Dal.Entities;
 
 namespace Api.Dal
 {
@@ -14,5 +15,6 @@ namespace Api.Dal
         { }
 
         public DbSet<UserEntity> User { get; set; }
+        public DbSet<HueBridgeEntity> HueBridge { get; set; }
     }
 }

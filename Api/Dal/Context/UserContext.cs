@@ -16,9 +16,9 @@ namespace Api.Dal.Context
             _context = context;
         }
 
-        public async Task<UserEntity> getUserByUsername(string username)
+        public async Task<UserEntity> SingleOrDefault(string username)
         {
-            return await _context.User.FirstOrDefaultAsync(o => o.Username == username);
+            return await _context.User.SingleOrDefaultAsync(x => x.Username == username);
         }
 
         public async Task<UserEntity> registerNewUser(UserEntity user)
@@ -31,6 +31,11 @@ namespace Api.Dal.Context
                 return user;
             }
             return null;
+        }
+
+        public Task<UserEntity> getUserByUsername(string username)
+        {
+            throw new NotImplementedException();
         }
     }
 }
