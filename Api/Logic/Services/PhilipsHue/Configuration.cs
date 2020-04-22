@@ -18,8 +18,6 @@ namespace Api.Logic.Services.Hue
 
         static Configuration()
         {
-
-
             //var json = "";
             //using (var sr = new StreamReader(_credFile))
             //{
@@ -31,7 +29,6 @@ namespace Api.Logic.Services.Hue
             //_bridgeIp = creds["MyBridgeIp"];
             //_appKey = creds["MyAppKey"];
         }
-
 
         public static void GetBridgeIps(int secondsTimeout)
         {
