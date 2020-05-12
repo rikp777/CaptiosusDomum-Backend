@@ -8,10 +8,10 @@ namespace Api.Api.EntityModels.User
     public class UserRegister
     {
 
-        public UserRegister()
-        {
+        //public UserRegister()
+        //{
+        //}
 
-        }
         public string username { get; set; }
         public string password { get; set; }
         public string email { get; set; }

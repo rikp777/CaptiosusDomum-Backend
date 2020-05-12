@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Api.Dal.Interface
 {
-    public class IHueBridgeContext
+    public interface IHueBridgeContext
     {
     }
 }

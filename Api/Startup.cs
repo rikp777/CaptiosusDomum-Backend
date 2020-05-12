@@ -19,6 +19,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Api.Logic.Services.User;
 using Api.Logic.Interfaces;
+using Api.Logic.Services;
 
 namespace Api
 {
@@ -75,9 +76,11 @@ namespace Api
 
             //CONTEXT
             services.AddScoped<IUserContext, UserContext>();
+            services.AddScoped<IRoomContext, RoomContext>();
 
             //LOGIC
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IRoomService, RoomService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

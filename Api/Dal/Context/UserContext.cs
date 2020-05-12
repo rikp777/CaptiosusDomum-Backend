@@ -1,4 +1,5 @@
-﻿using Api.Dal.Interface;
+﻿using Api.Dal.Entities;
+using Api.Dal.Interface;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -34,6 +35,11 @@ namespace Api.Dal.Context
         }
 
         public Task<UserEntity> getUserByUsername(string username)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<UserEntity> AddBridgeToUser(HueBridgeEntity hueBridge)
         {
             throw new NotImplementedException();
         }
