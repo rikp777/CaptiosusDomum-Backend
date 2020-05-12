@@ -21,7 +21,7 @@ namespace Api.Dal.Context
 
         public async Task<Room> Add([FromBody] Room room)
         {
-            RoomEntity newroom = new RoomEntity(room.Id, room.Name);
+            RoomEntity newroom = new RoomEntity(room.Id, room.Name, room.Description);
             await _context.Room.AddAsync(newroom);
             await _context.SaveChangesAsync();
 
@@ -53,7 +53,7 @@ namespace Api.Dal.Context
             List<RoomEntity> roomEntities = await _context.Room.ToListAsync();
             foreach (var room in roomEntities)
             {
-                rooms.Add(new Room(room.Id, room.Name));
+                rooms.Add(new Room(room.Id, room.Name, room.Description));
             }
             return rooms;
         }

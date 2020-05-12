@@ -22,7 +22,7 @@ namespace Api.Api.Controllers
         [HttpPost("create")]
         public async Task<JsonResult> Create(RoomEntityModel room)
         {
-            return new JsonResult(await _roomlogic.Add(new Room(0, room.Name)));
+            return new JsonResult(await _roomlogic.Add(new Room(0, room.Name, room.Description)));
         }
 
         [HttpPost("delete")]
@@ -34,7 +34,7 @@ namespace Api.Api.Controllers
         [HttpPost("update")]
         public async Task<JsonResult> Update(RoomEntityModel room)
         {
-            return new JsonResult(await _roomlogic.Update(new Room(room.Id, room.Name)));
+            return new JsonResult(await _roomlogic.Update(new Room(room.Id, room.Name, room.Description)));
         }
 
         [HttpPost("get")]

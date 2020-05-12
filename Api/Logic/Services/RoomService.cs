@@ -10,12 +10,12 @@ namespace Api.Logic.Services
 {
     public class RoomService: IRoomService
     {
-        private readonly IUserContext _userContext;
+        //private readonly IUserContext _userContext;
         private readonly IRoomContext _roomContext;
 
         public RoomService(IUserContext userContext, IRoomContext roomContext)
         {
-            _userContext = userContext;
+            //_userContext = userContext;
             _roomContext = roomContext;
         }
 

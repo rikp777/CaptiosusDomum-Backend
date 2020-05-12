@@ -13,11 +13,14 @@ namespace Api.Dal.Entities
         public int Id { get; private set; }
         [Required]
         public string Name { get; private set; }
+        [Required]
+        public string Description { get; private set; }
 
-        public RoomEntity(int id, string name)
+        public RoomEntity(int id, string name, string description)
         {
             Id = id;
             Name = name;
+            Description = description;
         }
     }
 }
