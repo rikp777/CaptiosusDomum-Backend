@@ -21,6 +21,10 @@ namespace Api
 
         public List<HueBridgeEntity> hueBridgeEntities { get; set; }
 
+        public UserEntity()
+        {
+        }
+
         public UserEntity(int id, string username, string password, string email)
         {
             Id = id;

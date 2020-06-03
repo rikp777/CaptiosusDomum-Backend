@@ -17,5 +17,7 @@ namespace Api.Dal.Entities.Core
         public float TargetTemperature { get; private set; }
         public float TargetHumidity { get; private set; }
 
+
+
     }
 }

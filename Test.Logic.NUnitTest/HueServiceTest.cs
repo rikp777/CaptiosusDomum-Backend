@@ -26,39 +26,39 @@ namespace Test.Logic.NUnitTest
         IUserContext _userContext;
         ILocalHueClient _client;
 
-        RepositoryContext(DbContextOptionsBuilder<RepositoryContext>) builder;
+        //RepositoryContext(DbContextOptionsBuilder<RepositoryContext>) builder;
 
-        [SetUp]
-        public void Setup()
-        {
-            builder = new RepositoryContext(DbContextOptionsBuilder<RepositoryContext>());
-            builder.UseInMemoryDatabase(databaseName: "RepositoryDBInMemory");
+        //[SetUp]
+        //public void Setup()
+        //{
+        //    builder = new RepositoryContext(DbContextOptionsBuilder<RepositoryContext>());
+        //    builder.UseInMemoryDatabase(databaseName: "RepositoryDBInMemory");
 
-            var dbContextOptions = builder.Options;
+        //    var dbContextOptions = builder.Options;
 
-            //dit is opbouw van database waar ik niet uit kom. Hier moet iig de builder
-            //context worden meegegeven
-            _userContext = new UserContext(builder);
-
-
-            //hier een regel voor het leeggooien van memory database
-        }
-
-        [Test]
-        public async Task<string> RegisterHueBridgeTestSucceed()
-        {
-            //arrange
-            string hueBridgeIp = "192.168.32.52";
-            //voor testen handig om bij de code deze stap erbuiten te doen
-            //idem voor het assignen van de waarde van huebridgeip of iig instantieren
-            _client = new LocalHueClient(hueBridgeIp)
+        //    //dit is opbouw van database waar ik niet uit kom. Hier moet iig de builder
+        //    //context worden meegegeven
+        //    _userContext = new UserContext(builder);
 
 
-            //act
+        //    //hier een regel voor het leeggooien van memory database
+        //}
+
+        //[Test]
+        //public async Task<string> RegisterHueBridgeTestSucceed()
+        //{
+        //    //arrange
+        //    string hueBridgeIp = "192.168.32.52";
+        //    //voor testen handig om bij de code deze stap erbuiten te doen
+        //    //idem voor het assignen van de waarde van huebridgeip of iig instantieren
+        //    _client = new LocalHueClient(hueBridgeIp)
+
+
+        //    //act
 
 
 
-            //assert
-        }
+        //    //assert
+        //}
     }
 }

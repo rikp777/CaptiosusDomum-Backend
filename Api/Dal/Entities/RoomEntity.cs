@@ -16,11 +16,25 @@ namespace Api.Dal.Entities
         [Required]
         public string Description { get; private set; }
 
+        public RoomEntity()
+        {
+        }
+
+
+
         public RoomEntity(int id, string name, string description)
         {
             Id = id;
             Name = name;
             Description = description;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is RoomEntity entity &&
+                   Id == entity.Id &&
+                   Name == entity.Name &&
+                   Description == entity.Description;
         }
     }
 }

@@ -15,6 +15,7 @@ namespace Api.Dal
         : base(options)
         { }
 
+
         public DbSet<UserEntity> User { get; set; }
         public DbSet<HueBridgeEntity> HueBridge { get; set; }
         public DbSet<LightEntity> Light { get; set; }

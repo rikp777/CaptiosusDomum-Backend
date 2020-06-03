@@ -29,9 +29,7 @@ namespace Api.Extensions
         public static void ConfigureIISIntegration(this IServiceCollection services)
         {
             services.Configure<IISOptions>(options =>
-            {
-
-            });
+            {});
         }
 
         // Register the Swagger generator, defining 1 or more Swagger documents

@@ -15,6 +15,9 @@ namespace Api.Dal.Entities
         [Required]
         public string AppKey { get; private set; }
 
+        public HueBridgeEntity()
+        {}
+
         public HueBridgeEntity(string bridgeIp, string appKey)
         {
             BridgeIp = bridgeIp ?? throw new ArgumentNullException(nameof(bridgeIp));

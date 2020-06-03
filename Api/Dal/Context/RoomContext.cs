@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Api.Dal.Context
 {
-    public class RoomContext : IRoomContext
+    public class RoomContext : IRoomContext, IDisposable
     {
         private RepositoryContext _context;
 
@@ -19,7 +19,7 @@ namespace Api.Dal.Context
             _context = context;
         }
 
-        public async Task<Room> Add([FromBody] Room room)
+        public async Task<Room> Add(Room room)
         {
             RoomEntity newroom = new RoomEntity(room.Id, room.Name, room.Description);
             await _context.Room.AddAsync(newroom);
@@ -32,7 +32,7 @@ namespace Api.Dal.Context
             return null;
         }
 
-        public async Task<bool> Delete([FromForm] int id)
+        public async Task<bool> Delete( int id)
         {
             var roomEntity = await  _context.Room.FirstOrDefaultAsync(o => o.Id == id);
             _context.Room.Remove(roomEntity);
@@ -47,6 +47,11 @@ namespace Api.Dal.Context
             return true;
         }
 
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<List<Room>> Get()
         {
             List<Room> rooms = new List<Room>();
@@ -58,7 +63,7 @@ namespace Api.Dal.Context
             return rooms;
         }
 
-        public async Task<Room> Update([FromBody] Room room)
+        public async Task<Room> Update(Room room)
         {
             var editedobject = await _context.Room.FirstOrDefaultAsync(o => o.Id == room.Id);
             _context.Entry(editedobject).CurrentValues.SetValues(room);
